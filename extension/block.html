@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video.js YouTube Autoplay Loop</title>
+  <style>
+    @font-face {
+      font-family: 'EliceDigitalBaeum-Bd';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'GmarketSansMedium';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ✅ 기본 스타일 수정 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ✅ 배경을 두 가지 색상으로 설정 */
+    body {
+      font-weight: 600;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(to right, #da0707dc 50%, #8f8f8f 50%);
+      /* 왼쪽은 파란색 (#0055A4), 오른쪽은 빨간색 (#EF4135) */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ✅ 비디오 컨테이너 (전체 화면 적용) */
+    .video-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50vw;
+      /* 전체 화면 너비 */
+      height: 100vh;
+      /* 전체 화면 높이 */
+      overflow: hidden;
+      /* 넘치는 부분 숨기기 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    /* ✅ Video.js 플레이어 스타일 */
+    .video-js {
+      width: 90%;
+      height: 60%;
+      object-fit: contain;
+      /* 화면 가득 차도록 설정 */
+      max-width: 100%;
+      max-height: 100%;
+      margin-right: 0px;
+      margin-top: -40px;
+    }
+
+
+
+    .card {
+      width: 900px;
+      padding-right: 10px;
+      height: fit-content;
+      padding-bottom: 12px;
+      background: lightgrey;
+      border-left-style: solid;
+      border-left-color: red;
+      border-left-width: 5px;
+      border-radius: 15px;
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      background: linear-gradient(to right, #f7575756, #f7575725 50%, #f7575738);
+      margin-left: -950px;
+      margin-top: -550px;
+    }
+
+    .card svg {
+      height: 60px;
+      padding-left: 10px;
+      padding-top: 20px;
+      fill: rgb(255, 238, 0);
+      float: left;
+      margin-left: 12px;
+      margin-right: 5px;
+    }
+
+    .card p {
+      font-family: 'GmarketSansMedium';
+      float: left;
+      padding-top: 13px;
+      padding-left: 10px;
+      color: white;
+      font-size: 38px;
+    }
+
+    .card span {
+      display: flex;
+      align-items: left;
+    }
+
+    .subtitle1 {
+      font-size: 25px;
+      color: white;
+      margin-bottom: 80px;
+    }
+
+    .subtitle2 {
+      font-size: 25px;
+      color: white;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      margin-left: -900px;
+    }
+
+
+    /* ✅ 버튼 컨테이너 개별 위치 설정 */
+    .button-container {
+      position: absolute;
+      bottom: 50px;
+      /* 원하는 위치 (페이지 아래쪽) */
+      left: 50px;
+      /* 왼쪽 여백 */
+      display: flex;
+      gap: 20px;
+      margin-bottom: -20px;
+    }
+
+    /* ✅ 버튼 스타일 */
+    .btn {
+      font-family: 'GmarketSansMedium';
+      font-size: 22px;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 250px;
+      margin-bottom: 100px;
+    }
+
+    .btn-danger {
+      background-color: #d9534f;
+      color: white;
+      margin-left: 300px;
+    }
+
+    .btn-danger:hover {
+      background-color: #9c0808;
+    }
+
+    /* .btn-safe {
+    background-color: #d9534f;
+    color: white;
+    margin-left: 100px;
+}
+
+.btn-safe:hover {
+    background-color: #9c0808;
+} */
+
+    /* ✅ 내용과 버튼 사이에 선 스타일 */
+    .custom-line {
+      position: absolute;
+      width: 48%;
+      /* 선의 길이 */
+      height: 2px;
+      /* 선 두께 */
+      background-color: white;
+      /* 선 색상 */
+      border: none;
+      margin-top: 450px;
+      /* 위아래 여백 조정 */
+      margin-left: -950px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <span><svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m569.517 440.013c18.458 31.994-4.711 71.987-41.577 71.987h-479.886c-36.937 0-59.999-40.055-41.577-71.987l239.946-416.028c18.467-32.009 64.72-31.951 83.154 0zm-281.517-86.013c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346 7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z">
+        </path>
+      </svg>
+      <p>
+        이 사이트는 위험이 감지되어 차단 되었습니다.
+      </p>
+  </div>
+
+  <div class="subtitle">
+    <div class="subtitle1">
+      <p>이 사이트는 악성 코드, 피싱, 또는 기타 보안 위협을 포함할 가능성이 있습니다.</p>
+      <p>개인 정보가 유출될 위험이 있으므로 즉이 페이지에서 벗어나십시오.</p>
+      <p>안전한 웹사이트인지 확인한 후 다시 방문하시기 바랍니다.</p>
+    </div>
+
+    <div class="subtitle2">
+      <p>This site may contain malware, phishing attempts, or other security threats.</p>
+      <p>Your personal information could be at risk.</p>
+      <p>Please leave this page immediately.</p>
+      <p>Verify that this website is safe before continuing</p>
+    </div>
+  </div>
+
+  <hr class="custom-line">
+
+  <div class="button-container">
+    <button class="btn btn-danger" id="backBtn" onclick="goBack()">돌아가기</button>
+  </div>
+
+
+  <div class="video-container">
+    <video id="my-video" class="video-js vjs-default-skin" controls autoplay loop muted>
+      <source src="./video/cybercrime_prevention.mp4" type="video/mp4">
+      브라우저에서 동영상을 지원하지 않습니다.
+    </video>
+  </div>
+
+  <!-- ✅ 이 두 줄을 추가하세요 (block.js 위에 있어야 함) -->
+  <link href="https://vjs.zencdn.net/8.9.0/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/8.9.0/video.min.js"></script>
+
+  <script src="block.js"></script>
+
+</body>
+
+</html>

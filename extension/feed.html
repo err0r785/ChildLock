@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Child Lock</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'LINESeedKR-Bd';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    body {
+      align-items: center;
+      height: 50vh;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .testbox {
+      background: linear-gradient(to top, #fff 63%, #eff5fa 37%);
+      padding: 20px 15px;
+      width: 330px;
+      height: 450px;
+      /* border: 1px solid #9e9e9e; */
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .head {
+      font-size: 38px;
+      font-weight: bold;
+      color: #006ae4;
+      margin: 15px 0 5px 0;
+      font-family: 'LINESeedKR-Bd';
+    }
+
+    .user-info {
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .user-info img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 6px 0 -15px 0;
+    }
+
+    .user-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .user-email {
+      font-size: 14px;
+      color: #666;
+      margin-top: 0px;
+      margin-bottom: 5px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 15px;
+      margin-top: -15px;
+    }
+
+    .menu-item {
+      width: 80%;
+      padding: 12px;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      color: #357ABD;
+      background: #f9f9f9;
+      border-radius: 15px;
+      font-weight: 600;
+    }
+
+    .menu-item:hover {
+      background: #e8f1ff;
+      transform: scale(1.05);
+    }
+
+    .menu-item i,
+    .menu-item span {
+      font-size: 18px;
+      margin-right: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="testbox">
+    <p class="head">Child Lock</p>
+    <div class="user-info">
+      <img id="profileImage" src="https://www.w3schools.com/w3images/avatar2.png" alt="User Profile">
+      <p class="user-name" id="username"></p>
+      <p class="user-email" id="userEmail">로그인이 필요합니다.</p>
+    </div>
+    <div class="menu">
+      <div class="menu-item" id="loginBtn"><span class="material-icons">login</span> 로그인</div>
+      <div class="menu-item" id="account_add"><span class="material-icons">person_add</span> 계정 연동</div>
+      <div class="menu-item" id="blockList"><span class="material-icons">block</span> 차단 목록</div>
+      <div class="menu-item" id="history"><span class="material-icons">history</span> 접속 기록</div>
+      <div class="menu-item" id="feedLink"><span class="material-icons">report</span> 의견 남기기</div>
+    </div>
+  </div>
+
+  <script src="menu.js"></script>
+</body>
+</html>

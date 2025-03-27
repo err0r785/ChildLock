@@ -1,0 +1,78 @@
+{
+  "manifest_version": 3,
+  "name": "Child Lock",
+  "version": "1.1",
+  "icons": { "16": "asdzxc.png", "128": "asdzxc.png" },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "history",
+    "identity",
+    "notifications",
+    "tabs", 
+    "scripting", 
+    "storage",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "http://localhost:8081/*",
+    "https://www.google.com/*",
+    "https://www.youtube.com/*",
+    "<all_urls>",
+    "*://*/*"
+  ],
+  "oauth2": {
+    "client_id": "557884841867-9o20in0i7s1aab1jrsfbtimi0u20adij.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "openid"
+    ]
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "feed.html",
+    "default_icon": {
+      "16": "qqq1.png",
+      "48": "qqq1.png",
+      "128": "qqq1.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "warning.html",
+        "block.html",
+        "feed.html",
+        "account.html",
+        "login.js",
+        "menu.js",
+        "feedback.js",
+        "warning.js",
+        "block.js",
+        "qqq1.png",
+        "qqq2.png",
+        "qqq3.png",
+        "qqq4.png",
+        "1x1.png",
+        "yel.png",
+        "red.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
